@@ -6,7 +6,12 @@ namespace EmployeeRep.Controllers
 {
     public class employeeController : Controller
     {
-        EmployeeRepo employeeRepo = new EmployeeRepo();
+        IEmployeeRepo employeeRepo; //= new EmployeeRepo();
+        public employeeController(IEmployeeRepo _employeeRepo)
+        {
+                
+            employeeRepo = _employeeRepo;
+        }
         public IActionResult Index()
         {
            List<Employee> employees=  employeeRepo.getall();

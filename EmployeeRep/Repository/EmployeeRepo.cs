@@ -2,9 +2,14 @@
 
 namespace EmployeeRep.Repository
 {
-    public class EmployeeRepo
+    public class EmployeeRepo : IEmployeeRepo
     {
-        CompanyDBContext dBContext = new CompanyDBContext();
+        CompanyDBContext dBContext;
+        public EmployeeRepo(CompanyDBContext _dBContext)
+        {
+            dBContext = _dBContext;
+                
+        }
 
         //get all 
         public List<Employee> getall()
@@ -22,15 +27,15 @@ namespace EmployeeRep.Repository
         public int create(Employee employee)
         {
             dBContext.Employees.Add(employee);
-          int row=  dBContext.SaveChanges();
+            int row = dBContext.SaveChanges();
 
             return row;
 
         }
         //update
-        public int update(int id ,Employee employee)
-        { 
-            Employee oldemployee= dBContext.Employees.FirstOrDefault(s=>s.SSN == id);
+        public int update(int id, Employee employee)
+        {
+            Employee oldemployee = dBContext.Employees.FirstOrDefault(s => s.SSN == id);
 
             oldemployee.Fname = employee.Fname;
             oldemployee.Lname = employee.Lname;
@@ -39,7 +44,7 @@ namespace EmployeeRep.Repository
             oldemployee.Minit = employee.Minit;
             oldemployee.Address = employee.Address;
             oldemployee.BirthDate = employee.BirthDate;
-            oldemployee.deptId= employee.deptId;
+            oldemployee.deptId = employee.deptId;
             int row = dBContext.SaveChanges();
             return row;
         }

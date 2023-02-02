@@ -16,7 +16,7 @@ namespace EmployeeRep.Models
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Data Source= DESKTOP-R3M46C9\\AA17;Initial Catalog= LayearDB;Integrated Security=True;TrustServerCertificate = True;");
-            base.OnConfiguring(optionsBuilder);
+          //  base.OnConfiguring(optionsBuilder);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
