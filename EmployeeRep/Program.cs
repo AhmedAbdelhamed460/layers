@@ -1,5 +1,6 @@
 using EmployeeRep.Models;
 using EmployeeRep.Repository;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,7 @@ builder.Services.AddDbContext<CompanyDBContext>(options => options.UseSqlServer(
 //builder.Services.AddSingleton<IEmployeeRepo , EmployeeRepo>();
 //builder.Services.AddTransient<IEmployeeRepo, EmployeeRepo>();
 builder.Services.AddScoped<IEmployeeRepo,EmployeeRepo>();
+builder.Services.AddIdentity<IdentityUser,IdentityRole>().AddEntityFrameworkStores<CompanyDBContext>();
 
 var app = builder.Build();
 
@@ -23,6 +25,7 @@ if (!app.Environment.IsDevelopment())
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseAuthentication();
 
 app.UseAuthorization();
 

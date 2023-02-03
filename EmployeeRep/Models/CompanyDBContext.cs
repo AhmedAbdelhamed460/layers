@@ -1,10 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+
 namespace EmployeeRep.Models
 {
-    public class CompanyDBContext : DbContext
+    public class CompanyDBContext :IdentityDbContext
+
     {
+        
         public CompanyDBContext()
         {
 
@@ -29,6 +33,8 @@ namespace EmployeeRep.Models
 
             modelBuilder.Entity<Employee>().HasOne(e => e.DepartmentManege).WithOne(d => d.employeeManege);
             modelBuilder.Entity<Employee>().HasOne(e => e.DepartmentWork).WithMany(e => e.EmployeesWork);
+            base.OnModelCreating(modelBuilder);
+
         }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Project> Projects { get; set; }

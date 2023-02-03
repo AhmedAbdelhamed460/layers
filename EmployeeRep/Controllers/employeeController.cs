@@ -1,5 +1,6 @@
 ﻿using EmployeeRep.Models;
 using EmployeeRep.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmployeeRep.Controllers
@@ -18,6 +19,7 @@ namespace EmployeeRep.Controllers
 
             return View(employees);
         }
+        [Authorize]
         public IActionResult GetByid(int id)
         {
             Employee employee = employeeRepo.getbyId(id);
